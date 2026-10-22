@@ -440,7 +440,11 @@ input, textarea {
   :root { --header: 68px; }
   body { overflow-x: hidden; }
   section { padding: 48px 0; }
-  .site-header { padding: 0 12px; }
+  .site-header { padding: 0 12px; gap: 8px; }
+  .brand { flex: 1 1 auto; }
+  .brand img { width: 40px; height: 40px; }
+  .brand-name { font-size: 17px; }
+  .header-actions { flex: 0 0 auto; }
   .brand-tag { display: none; }
   .burger { display: inline-flex; align-items: center; justify-content: center; }
   .nav {
@@ -472,6 +476,14 @@ input, textarea {
   }
   .hero h1 { font-size: 34px; max-width: 100%; line-height: 1.12; overflow-wrap: normal; }
   .hero .lead { font-size: 16px; }
+  .section-head { flex-direction: column; align-items: flex-start; }
+  .page-hero { padding: 28px 0 4px; }
+  .page-hero h1 { font-size: clamp(32px, 9vw, 48px); max-width: 100%; }
+  .page-hero p, .block-title, .section-head h2 { max-width: 100%; }
+  .stat b { font-size: 36px; }
+  .product img { height: 180px; }
+  .recipe-card img { height: 200px; }
+  .copy { flex-direction: column; }
   .hero-actions, .cta-actions { width: 100%; }
   .hero-actions .btn, .cta-actions .btn, .path .btn { width: 100%; }
   .photo-frame, .photo-frame img { min-height: 240px; }
