@@ -135,12 +135,12 @@ if (!canvas) {
     function fit() {
       const width = canvas.clientWidth || window.innerWidth;
       const height = canvas.clientHeight || window.innerHeight;
-      const narrow = width < 800;
+      const narrow = width < 980 || height < 460;
       camera.aspect = width / Math.max(height, 1);
       camera.position.x = narrow ? 0 : -0.4;
       camera.updateProjectionMatrix();
-      baseX = narrow ? 0.15 : 1.85;
-      baseY = narrow ? 0.15 : -0.05;
+      baseX = narrow ? 0 : 2.25;
+      baseY = narrow ? 0 : -0.1;
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, narrow ? 1.25 : 1.6));
       renderer.setSize(width, height, false);
     }
