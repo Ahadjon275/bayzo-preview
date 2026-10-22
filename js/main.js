@@ -39,15 +39,23 @@ if (form) {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const data = new FormData(form);
+    const lang = document.documentElement.lang === "en" || document.documentElement.lang === "tg"
+      ? document.documentElement.lang
+      : "ru";
+    const labels = {
+      ru: { name: "Имя", phone: "Телефон", subject: "Заявка с сайта Bayzo" },
+      tg: { name: "Ном", phone: "Телефон", subject: "Дархост аз сомонаи Bayzo" },
+      en: { name: "Name", phone: "Phone", subject: "Request from the Bayzo website" }
+    }[lang];
     const body = [
-      "Имя: " + data.get("name"),
-      "Телефон: " + data.get("phone"),
+      labels.name + ": " + data.get("name"),
+      labels.phone + ": " + data.get("phone"),
       "",
       data.get("message")
     ].join("\n");
     const note = form.querySelector(".form-note");
     if (note) note.classList.add("show");
-    window.location.href = "mailto:info@bayzo.tj?subject=" + encodeURIComponent("Заявка с сайта Bayzo") + "&body=" + encodeURIComponent(body);
+    window.location.href = "mailto:info@bayzo.tj?subject=" + encodeURIComponent(labels.subject) + "&body=" + encodeURIComponent(body);
   });
 }
 

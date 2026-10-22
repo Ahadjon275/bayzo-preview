@@ -8,7 +8,7 @@
   <link rel="icon" href="https://bayzo.tj/wp-content/uploads/2025/09/bayzo_logo_512x512-150x150.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,600;7..72,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,600;7..72,700&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans:wght@400;600;700&family=Noto+Serif:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -26,20 +26,29 @@
       <a href="contacts.html">Контакты</a>
     </nav>
     <div class="header-actions">
+      <div class="langs" role="group" aria-label="Язык">
+        <button type="button" data-lang="ru">RU</button>
+        <button type="button" data-lang="tg">TJ</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
       <a class="btn btn-phone" href="tel:8811">88 11</a>
       <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false"><span></span></button>
     </div>
   </header>
 
   <section class="hero">
-    <img class="hero-bg" src="https://bayzo.tj/wp-content/uploads/2026/03/275241152_111122038180219_7720048118067348134_n-2048x848.jpg" alt="Производство Bayzo">
-    <div class="hero-content">
-      <p class="eyebrow">Таджикистан · с 2018 года</p>
-      <h1>Натуральный вкус родного края</h1>
-      <p class="lead">С нашей фермы к вашему столу. Мясо цыплёнка-бройлера, выращенное в замкнутом цикле и проверенное на каждом этапе.</p>
-      <div class="hero-actions">
-        <a class="btn btn-light" href="catalog.html">Смотреть каталог</a>
-        <a class="btn btn-ghost" href="about.html">О компании</a>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Таджикистан · с 2018 года</p>
+        <h1>Натуральный вкус родного края</h1>
+        <p class="lead">С нашей фермы к вашему столу. Мясо цыплёнка-бройлера, выращенное в замкнутом цикле и проверенное на каждом этапе.</p>
+        <div class="hero-actions">
+          <a class="btn btn-green" href="catalog.html">Смотреть каталог</a>
+          <a class="btn btn-line" href="about.html">О компании</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="https://bayzo.tj/wp-content/uploads/2026/03/275241152_111122038180219_7720048118067348134_n-2048x848.jpg" alt="Производство Bayzo">
       </div>
     </div>
   </section>
@@ -315,5 +324,6 @@
     </div>
   </footer>
   <script src="js/main.js"></script>
+  <script src="js/i18n.js"></script>
 </body>
 </html>
