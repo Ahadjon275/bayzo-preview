@@ -321,10 +321,20 @@
     ]
   };
 
-  const dict = { tg: {}, en: {} };
+  const CODES = ["ru", "tg", "en", "zh", "tr", "uz", "fa"];
+  const HTML_LANG = { ru: "ru", tg: "tg", en: "en", zh: "zh-CN", tr: "tr", uz: "uz", fa: "fa" };
+  const BUTTON = { ru: "RU", tg: "TJ", en: "EN", zh: "中文", tr: "TR", uz: "UZ", fa: "فا" };
+  const dict = { tg: {}, en: {}, zh: {}, tr: {}, uz: {}, fa: {} };
   Object.keys(pair).forEach((src) => {
     dict.tg[src] = pair[src][0];
     dict.en[src] = pair[src][1];
+  });
+  const more = window.BAYZO_LANGS || {};
+  Object.keys(more.strings || {}).forEach((src) => {
+    const row = more.strings[src];
+    ["zh", "tr", "uz", "fa"].forEach((code) => {
+      if (row[code]) dict[code][src] = row[code];
+    });
   });
 
   const originals = new WeakMap();
@@ -349,6 +359,7 @@
   }
 
   function apply(lang) {
+    if (CODES.indexOf(lang) < 0) lang = "ru";
     const map = lang === "ru" ? null : dict[lang];
     textNodes(document.body).forEach((node) => {
       if (!originals.has(node)) originals.set(node, node.textContent);
@@ -374,30 +385,64 @@
     });
     const page = pageFile();
     const pack = titles[page];
-    if (pack) document.title = lang === "tg" ? pack[0] : lang === "en" ? pack[1] : pack[2];
+    const extraTitle = more.titles && more.titles[page];
+    const extraAbout = more.descriptions && more.descriptions[page];
+    if (pack) {
+      document.title = lang === "tg" ? pack[0] : lang === "en" ? pack[1] : lang === "ru" ? pack[2] : (extraTitle && extraTitle[lang]) || pack[2];
+    }
     const meta = document.querySelector('meta[name="description"]');
     const about = descriptions[page];
-    if (meta && about) meta.setAttribute("content", lang === "tg" ? about[0] : lang === "en" ? about[1] : about[2]);
-    document.documentElement.lang = lang;
-    document.querySelectorAll("[data-lang]").forEach((btn) => {
+    if (meta && about) {
+      const content = lang === "tg" ? about[0] : lang === "en" ? about[1] : lang === "ru" ? about[2] : (extraAbout && extraAbout[lang]) || about[2];
+      meta.setAttribute("content", content);
+    }
+    document.documentElement.lang = HTML_LANG[lang] || "ru";
+    document.documentElement.dir = lang === "fa" ? "rtl" : "ltr";
+    document.documentElement.dataset.lang = lang;
+    document.querySelectorAll("button[data-lang]").forEach((btn) => {
       const on = btn.dataset.lang === lang;
       btn.classList.toggle("active", on);
       btn.setAttribute("aria-pressed", on ? "true" : "false");
     });
+    const toggle = document.querySelector(".lang-toggle");
+    const list = document.querySelector(".lang-list");
+    if (toggle) toggle.textContent = BUTTON[lang] || "RU";
+    if (list) list.hidden = true;
+    if (toggle) toggle.setAttribute("aria-expanded", "false");
     try { localStorage.setItem(KEY, lang); } catch (err) { /* private mode */ }
   }
 
   function current() {
     const query = new URLSearchParams(location.search).get("lang");
-    if (query === "ru" || query === "tg" || query === "en") return query;
+    if (CODES.indexOf(query) >= 0) return query;
     try {
       const saved = localStorage.getItem(KEY);
-      if (saved === "ru" || saved === "tg" || saved === "en") return saved;
+      if (CODES.indexOf(saved) >= 0) return saved;
     } catch (err) { /* ignore */ }
     return "ru";
   }
 
-  document.querySelectorAll("[data-lang]").forEach((btn) => {
+  const toggle = document.querySelector(".lang-toggle");
+  const list = document.querySelector(".lang-list");
+  if (toggle && list) {
+    toggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const open = list.hidden;
+      list.hidden = !open;
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    document.addEventListener("click", () => {
+      list.hidden = true;
+      toggle.setAttribute("aria-expanded", "false");
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        list.hidden = true;
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+  document.querySelectorAll("button[data-lang]").forEach((btn) => {
     btn.addEventListener("click", () => apply(btn.dataset.lang));
   });
   apply(current());

@@ -8,8 +8,8 @@
   <link rel="icon" href="https://bayzo.tj/wp-content/uploads/2025/09/bayzo_logo_512x512-150x150.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=phone">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans:wght@400;600;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=langs">
 </head>
 <body>
   <header class="site-header">
@@ -26,10 +26,17 @@
       <a href="contacts.html">Контакты</a>
     </nav>
     <div class="header-actions">
-      <div class="langs" role="group" aria-label="Язык">
-        <button type="button" data-lang="ru">RU</button>
-        <button type="button" data-lang="tg">TJ</button>
-        <button type="button" data-lang="en">EN</button>
+      <div class="langs">
+        <button class="lang-toggle" type="button" aria-expanded="false" aria-haspopup="listbox" aria-label="Язык">RU</button>
+        <div class="lang-list" role="listbox" hidden>
+          <button type="button" role="option" data-lang="en">English</button>
+          <button type="button" role="option" data-lang="ru">Русский</button>
+          <button type="button" role="option" data-lang="zh">中文 (中国)</button>
+          <button type="button" role="option" data-lang="tr">Türkçe</button>
+          <button type="button" role="option" data-lang="uz">Oʻzbek</button>
+          <button type="button" role="option" data-lang="fa">فارسی</button>
+          <button type="button" role="option" data-lang="tg">Тоҷикӣ</button>
+        </div>
       </div>
       <a class="btn btn-phone" href="tel:8811">88 11</a>
       <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false"><span></span></button>
@@ -156,7 +163,8 @@
       <div class="copy"><span>© <span data-year>2026</span> Bayzo</span><a href="https://bayzo.tj/catalog/" target="_blank" rel="noreferrer">Каталог на bayzo.tj</a></div>
     </div>
   </footer>
-  <script src="js/main.js?v=phone"></script>
-  <script src="js/i18n.js?v=phone"></script>
+  <script src="js/main.js?v=langs"></script>
+  <script src="js/more.js?v=langs"></script>
+  <script src="js/i18n.js?v=langs"></script>
 </body>
 </html>
