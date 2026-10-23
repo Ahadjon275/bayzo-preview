@@ -467,14 +467,20 @@ input, textarea {
   .split, .about-grid, .map-layout, .contact-grid, .footer-grid, .cta { grid-template-columns: 1fr; }
   .stat { border-right: 0; border-bottom: 1px solid var(--line); }
   .hero { display: block; min-height: 0; }
-  .hero-visual { position: relative; height: 280px; }
-  .hero-shade { background: linear-gradient(180deg, rgba(7,17,12,0.05) 20%, #07110c 92%); }
+  .hero-visual { position: relative; height: 340px; }
+  .hero-shade { background: linear-gradient(180deg, rgba(7,17,12,0.05) 18%, #07110c 90%); }
   .hero-copy {
-    width: min(1180px, calc(100% - 28px));
-    margin: 0 auto;
-    padding: 4px 0 28px;
+    width: 100%;
+    margin: 0;
+    padding: 8px 22px 32px;
   }
-  .hero h1 { font-size: 34px; max-width: 100%; line-height: 1.12; overflow-wrap: normal; }
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 44px);
+    max-width: 8.6em;
+    line-height: 1.08;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
   .hero .lead { font-size: 16px; }
   .section-head { flex-direction: column; align-items: flex-start; }
   .page-hero { padding: 28px 0 4px; }
@@ -491,7 +497,23 @@ input, textarea {
   .cta { align-items: stretch; padding: 22px; }
 }
 @media (max-width: 640px) {
-  .wrap, .hero-copy { width: min(1180px, calc(100% - 28px)); }
+  .wrap { width: min(1180px, calc(100% - 36px)); }
+  .hero {
+    display: flex;
+    align-items: flex-end;
+    min-height: calc(100svh - var(--header));
+    min-height: calc(100dvh - var(--header));
+  }
+  .hero-visual { position: absolute; inset: 0; height: auto; }
+  .hero-shade {
+    background: linear-gradient(180deg, rgba(7, 17, 12, 0.18) 0%, rgba(7, 17, 12, 0.02) 30%, rgba(7, 17, 12, 0.82) 64%, #07110c 100%);
+  }
+  .hero-copy {
+    width: 100%;
+    margin: 0;
+    padding: 24px 22px calc(22px + env(safe-area-inset-bottom));
+  }
+  .hero h1 { font-size: clamp(30px, 8.5vw, 38px); max-width: 8.4em; }
   .product-grid, .reasons, .timeline, .steps { grid-template-columns: 1fr; }
   .langs button { padding: 6px 7px; }
   .btn-phone { padding: 10px 12px; font-size: 14px; }

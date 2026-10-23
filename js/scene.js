@@ -135,13 +135,30 @@ if (!canvas) {
     function fit() {
       const width = canvas.clientWidth || window.innerWidth;
       const height = canvas.clientHeight || window.innerHeight;
-      const narrow = width < 980 || height < 460;
+      const phone = width < 760;
+      const narrow = !phone && (width < 980 || height < 460);
       camera.aspect = width / Math.max(height, 1);
-      camera.position.x = narrow ? 0 : -0.4;
+      if (phone) {
+        camera.fov = 32;
+        camera.position.set(0.1, 0.1, 8.4);
+        baseX = 0.95;
+        baseY = 1.68;
+        bird.scale.setScalar(0.56);
+      } else if (narrow) {
+        camera.fov = 32;
+        camera.position.set(0, 0.85, 7.4);
+        baseX = 0;
+        baseY = 0;
+        bird.scale.setScalar(0.72);
+      } else {
+        camera.fov = 32;
+        camera.position.set(-0.4, 0.85, 7.4);
+        baseX = 2.25;
+        baseY = -0.1;
+        bird.scale.setScalar(0.72);
+      }
       camera.updateProjectionMatrix();
-      baseX = narrow ? 0 : 2.25;
-      baseY = narrow ? 0 : -0.1;
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, narrow ? 1.25 : 1.6));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, phone || narrow ? 1.25 : 1.6));
       renderer.setSize(width, height, false);
     }
 
