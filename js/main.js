@@ -20,13 +20,12 @@ if (burger && nav) {
 
 document.querySelectorAll(".filters").forEach((bar) => {
   const buttons = bar.querySelectorAll("button");
-  const cards = document.querySelectorAll("[data-cat]");
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
       buttons.forEach((item) => item.classList.remove("active"));
       button.classList.add("active");
       const filter = button.dataset.filter;
-      cards.forEach((card) => {
+      document.querySelectorAll("[data-cat]").forEach((card) => {
         const show = filter === "all" || card.dataset.cat.split(" ").includes(filter);
         card.classList.toggle("hidden", !show);
       });

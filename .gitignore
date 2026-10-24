@@ -1,0 +1,4 @@
+data/auth.json
+data/password.txt
+__pycache__/
+_chrome_profile/

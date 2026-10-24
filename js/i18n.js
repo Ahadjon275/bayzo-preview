@@ -445,5 +445,6 @@
   document.querySelectorAll("button[data-lang]").forEach((btn) => {
     btn.addEventListener("click", () => apply(btn.dataset.lang));
   });
+  window.BayzoI18n = { apply(lang) { apply(lang || current()); } };
   apply(current());
 })();

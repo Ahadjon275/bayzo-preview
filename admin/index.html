@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Админка — Bayzo</title>
+  <link rel="icon" href="https://bayzo.tj/wp-content/uploads/2025/09/bayzo_logo_512x512-150x150.png">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css?v=admin">
+  <style>
+    body { background: #07110c; }
+    .admin { width: min(980px, calc(100% - 28px)); margin: 24px auto 64px; }
+    .admin h1 { font-family: Manrope, sans-serif; font-size: 32px; }
+    .panel, .card-edit {
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 18px;
+      margin-top: 16px;
+    }
+    .login-box { width: min(420px, calc(100% - 28px)); margin: 12vh auto; }
+    label { display: grid; gap: 6px; margin-top: 12px; font-weight: 700; font-size: 14px; }
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: #0d1b14;
+      color: #e8f3ec;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font: inherit;
+    }
+    textarea { min-height: 90px; resize: vertical; }
+    .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .error { color: #ffb4b4; min-height: 1.4em; }
+    .ok { color: #8ee0ad; }
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+    .tabs button.active { background: #3dce74; color: #06210f; }
+    .item-head { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+    .check { display: flex; align-items: center; gap: 8px; font-weight: 700; }
+    .check input { width: auto; }
+    .hint { color: #b7c9bf; margin: 8px 0 0; }
+    .hint a { color: #8ee0ad; }
+    @media (max-width: 640px) {
+      .admin h1 { font-size: 26px; }
+      .item-head { align-items: stretch; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <main id="login" class="panel login-box">
+    <p class="kicker">Bayzo</p>
+    <h1>Вход в админку</h1>
+    <p class="muted">Логин: bayzo. Пароль написан в консоли при первом запуске и в файле data/password.txt.</p>
+    <form id="login-form">
+      <label>Пароль
+        <input name="password" type="password" required autocomplete="current-password">
+      </label>
+      <p class="error" id="login-error"></p>
+      <button class="btn btn-green" type="submit">Войти</button>
+    </form>
+  </main>
+
+  <main id="app" class="admin" hidden>
+    <div class="row" style="justify-content:space-between">
+      <div>
+        <p class="kicker">Bayzo</p>
+        <h1>Админка</h1>
+      </div>
+      <div class="row">
+        <a class="btn btn-line" href="../index.html">3D-сайт</a>
+        <a class="btn btn-line" href="../classic/index.html">Классический сайт</a>
+        <button class="btn btn-line" id="logout" type="button">Выйти</button>
+      </div>
+    </div>
+    <p class="ok" id="status"></p>
+    <div class="tabs">
+      <button class="btn btn-line active" type="button" data-tab="contacts">Контакты</button>
+      <button class="btn btn-line" type="button" data-tab="vacancies">Вакансии</button>
+      <button class="btn btn-line" type="button" data-tab="products">Каталог</button>
+      <button class="btn btn-line" type="button" data-tab="partners">Партнёры</button>
+      <button class="btn btn-line" type="button" data-tab="stores">Магазины</button>
+    </div>
+
+    <section data-pane="contacts" class="panel">
+      <label>Короткий номер <input id="phoneShort"></label>
+      <label>Ссылка короткого номера <input id="phoneShortHref" placeholder="tel:8811"></label>
+      <label>Телефон отдела кадров <input id="phoneHr"></label>
+      <label>Ссылка телефона кадров <input id="phoneHrHref" placeholder="tel:+992924008811"></label>
+      <label>Почта <input id="email" type="email"></label>
+      <label>Почта кадров <input id="hrEmail" type="email"></label>
+      <label>Адрес <input id="address"></label>
+      <label>Ссылка на карту <input id="map"></label>
+    </section>
+
+    <section data-pane="vacancies" hidden>
+      <p class="row"><button class="btn btn-green" id="add-job" type="button">Добавить вакансию</button></p>
+      <div id="jobs"></div>
+    </section>
+
+    <section data-pane="products" hidden>
+      <p class="hint">Кнопка «Загрузить фото» стоит у каждого товара. После «Сохранить» фото видно в <a href="../classic/catalog.html">классическом каталоге</a> и на 3D-сайте.</p>
+      <p class="row"><button class="btn btn-green" id="add-product" type="button">Добавить товар</button></p>
+      <div id="products"></div>
+    </section>
+
+    <section data-pane="partners" hidden>
+      <p class="hint">Логотипы идут по кругу на <a href="../classic/index.html">классической главной</a>. Загрузите фото и нажмите «Сохранить».</p>
+      <p class="row"><button class="btn btn-green" id="add-partner" type="button">Добавить партнёра</button></p>
+      <div id="partners"></div>
+    </section>
+
+    <section data-pane="stores" hidden>
+      <p class="hint">Список открывается на <a href="../classic/stores.html">странице магазинов</a>. Адрес обязателен, время работы и ссылка на карту — по желанию.</p>
+      <p class="row"><button class="btn btn-green" id="add-store" type="button">Добавить магазин</button></p>
+      <div id="stores"></div>
+    </section>
+
+    <p style="margin-top:18px"><button class="btn btn-green" id="save" type="button">Сохранить</button></p>
+  </main>
+
+  <script>
+    var content = null;
+
+    function api(path, options) {
+      options = options || {};
+      options.credentials = "same-origin";
+      options.headers = Object.assign({ "Content-Type": "application/json" }, options.headers || {});
+      return fetch(path, options).then(function (response) {
+        return response.json().then(function (body) {
+          if (!response.ok) throw new Error(body.error || "Ошибка");
+          return body;
+        });
+      });
+    }
+
+    function lines(value) { return (value || []).join("\n"); }
+    function splitLines(value) { return value.split(/\n+/).map(function (s) { return s.trim(); }).filter(Boolean); }
+
+    function field(label, value, key, multiline) {
+      var wrap = document.createElement("label");
+      wrap.textContent = label;
+      var input = document.createElement(multiline ? "textarea" : "input");
+      input.value = value || "";
+      input.dataset.key = key;
+      wrap.appendChild(input);
+      return wrap;
+    }
+
+    function drawJobs() {
+      var box = document.getElementById("jobs");
+      box.replaceChildren();
+      content.vacancies.forEach(function (job, index) {
+        var card = document.createElement("article");
+        card.className = "card-edit";
+        var head = document.createElement("div");
+        head.className = "item-head";
+        var strong = document.createElement("strong");
+        strong.textContent = job.title || "Новая вакансия";
+        var del = document.createElement("button");
+        del.className = "btn btn-line";
+        del.type = "button";
+        del.textContent = "Удалить";
+        del.addEventListener("click", function () {
+          content.vacancies.splice(index, 1);
+          drawJobs();
+        });
+        head.appendChild(strong);
+        head.appendChild(del);
+        card.appendChild(head);
+        ["tag", "title", "lead"].forEach(function (key) {
+          var names = { tag: "Метка", title: "Должность", lead: "Описание" };
+          var node = field(names[key], job[key], key, key === "lead");
+          node.querySelector("input, textarea").addEventListener("input", function (event) {
+            job[key] = event.target.value;
+            if (key === "title") strong.textContent = event.target.value || "Новая вакансия";
+          });
+          card.appendChild(node);
+        });
+        [["tasks", "Задачи, каждая с новой строки"], ["needs", "Требования"], ["terms", "Условия"]].forEach(function (pair) {
+          var node = field(pair[1], lines(job[pair[0]]), pair[0], true);
+          var area = node.querySelector("textarea");
+          area.addEventListener("input", function () { job[pair[0]] = splitLines(area.value); });
+          card.appendChild(node);
+        });
+        var check = document.createElement("label");
+        check.className = "check";
+        var boxInput = document.createElement("input");
+        boxInput.type = "checkbox";
+        boxInput.checked = job.showEmail !== false;
+        boxInput.addEventListener("change", function () { job.showEmail = boxInput.checked; });
+        check.appendChild(boxInput);
+        check.appendChild(document.createTextNode("Показывать почту кадров"));
+        card.appendChild(check);
+        box.appendChild(card);
+      });
+    }
+
+    function drawProducts() {
+      var box = document.getElementById("products");
+      box.replaceChildren();
+      var names = { fresh: "Охлаждённая", frozen: "Замороженная", box: "Коробки 10 кг", offal: "Субпродукты", nut: "Нут" };
+      content.products.forEach(function (item, index) {
+        var card = document.createElement("article");
+        card.className = "card-edit";
+        var head = document.createElement("div");
+        head.className = "item-head";
+        var strong = document.createElement("strong");
+        strong.textContent = item.title || "Новый товар";
+        var del = document.createElement("button");
+        del.className = "btn btn-line";
+        del.type = "button";
+        del.textContent = "Удалить";
+        del.addEventListener("click", function () {
+          content.products.splice(index, 1);
+          drawProducts();
+        });
+        head.appendChild(strong);
+        head.appendChild(del);
+        card.appendChild(head);
+        var catLabel = document.createElement("label");
+        catLabel.textContent = "Раздел";
+        var select = document.createElement("select");
+        Object.keys(names).forEach(function (key) {
+          var option = document.createElement("option");
+          option.value = key;
+          option.textContent = names[key];
+          if (item.cat === key) option.selected = true;
+          select.appendChild(option);
+        });
+        select.addEventListener("change", function () { item.cat = select.value; });
+        catLabel.appendChild(select);
+        card.appendChild(catLabel);
+        [["badge", "Подпись"], ["title", "Название"]].forEach(function (pair) {
+          var node = field(pair[1], item[pair[0]], pair[0]);
+          node.querySelector("input").addEventListener("input", function (event) {
+            item[pair[0]] = event.target.value;
+            if (pair[0] === "title") strong.textContent = event.target.value || "Новый товар";
+          });
+          card.appendChild(node);
+        });
+        var preview = document.createElement("img");
+        preview.alt = "";
+        preview.style.cssText = "width:120px;height:120px;object-fit:cover;border-radius:16px;margin-top:12px;background:#102018";
+        function showPreview() {
+          if (!item.image) { preview.hidden = true; return; }
+          preview.hidden = false;
+          preview.src = item.image.indexOf("https://") === 0 ? item.image : "../" + item.image;
+        }
+        showPreview();
+        card.appendChild(preview);
+        var file = document.createElement("input");
+        file.type = "file";
+        file.accept = "image/jpeg,image/png,image/webp,image/gif";
+        file.hidden = true;
+        var upload = document.createElement("button");
+        upload.className = "btn btn-line";
+        upload.type = "button";
+        upload.textContent = "Загрузить фото";
+        upload.style.marginTop = "12px";
+        upload.addEventListener("click", function () { file.click(); });
+        file.addEventListener("change", function () {
+          var chosen = file.files && file.files[0];
+          if (!chosen) return;
+          var body = new FormData();
+          body.append("file", chosen);
+          upload.disabled = true;
+          upload.textContent = "Загружаю…";
+          fetch("/api/admin/upload", { method: "POST", credentials: "same-origin", body: body })
+            .then(function (response) {
+              return response.json().then(function (payload) {
+                if (!response.ok) throw new Error(payload.error || "Не удалось загрузить");
+                return payload;
+              });
+            })
+            .then(function (payload) {
+              item.image = payload.url;
+              link.querySelector("input").value = "";
+              showPreview();
+            })
+            .catch(function (err) { alert(err.message); })
+            .finally(function () {
+              upload.disabled = false;
+              upload.textContent = "Загрузить фото";
+              file.value = "";
+            });
+        });
+        card.appendChild(upload);
+        card.appendChild(file);
+        var link = field("Или ссылка на фото", item.image && item.image.indexOf("https://") === 0 ? item.image : "", "image");
+        link.querySelector("input").addEventListener("input", function (event) {
+          var value = event.target.value.trim();
+          if (!value || value.indexOf("https://") === 0) {
+            item.image = value;
+            showPreview();
+          }
+        });
+        card.appendChild(link);
+        box.appendChild(card);
+      });
+    }
+
+    function fillContacts() {
+      ["phoneShort", "phoneShortHref", "phoneHr", "phoneHrHref", "email", "hrEmail", "address", "map"].forEach(function (key) {
+        document.getElementById(key).value = content.contacts[key] || "";
+      });
+    }
+
+    function readContacts() {
+      ["phoneShort", "phoneShortHref", "phoneHr", "phoneHrHref", "email", "hrEmail", "address", "map"].forEach(function (key) {
+        content.contacts[key] = document.getElementById(key).value.trim();
+      });
+    }
+
+    function drawPartners() {
+      var box = document.getElementById("partners");
+      box.replaceChildren();
+      (content.partners || []).forEach(function (item, index) {
+        var card = document.createElement("article");
+        card.className = "card-edit";
+        var head = document.createElement("div");
+        head.className = "item-head";
+        var strong = document.createElement("strong");
+        strong.textContent = item.name || "Партнёр";
+        var del = document.createElement("button");
+        del.className = "btn btn-line";
+        del.type = "button";
+        del.textContent = "Удалить";
+        del.addEventListener("click", function () {
+          content.partners.splice(index, 1);
+          drawPartners();
+        });
+        head.appendChild(strong);
+        head.appendChild(del);
+        card.appendChild(head);
+        var name = field("Название", item.name, "name");
+        name.querySelector("input").addEventListener("input", function (event) {
+          item.name = event.target.value;
+          strong.textContent = event.target.value || "Партнёр";
+        });
+        card.appendChild(name);
+        var preview = document.createElement("img");
+        preview.alt = "";
+        preview.style.cssText = "width:92px;height:92px;object-fit:contain;border-radius:16px;margin-top:12px;background:#fff;padding:8px";
+        function showPreview() {
+          if (!item.image) { preview.hidden = true; return; }
+          preview.hidden = false;
+          preview.src = item.image.indexOf("https://") === 0 ? item.image : "../" + item.image;
+        }
+        showPreview();
+        card.appendChild(preview);
+        var file = document.createElement("input");
+        file.type = "file";
+        file.accept = "image/jpeg,image/png,image/webp,image/gif";
+        file.hidden = true;
+        var upload = document.createElement("button");
+        upload.className = "btn btn-line";
+        upload.type = "button";
+        upload.textContent = "Загрузить фото";
+        upload.style.marginTop = "12px";
+        upload.addEventListener("click", function () { file.click(); });
+        var link = field("Или ссылка на фото", item.image && item.image.indexOf("https://") === 0 ? item.image : "", "image");
+        file.addEventListener("change", function () {
+          var chosen = file.files && file.files[0];
+          if (!chosen) return;
+          var body = new FormData();
+          body.append("file", chosen);
+          upload.disabled = true;
+          upload.textContent = "Загружаю…";
+          fetch("/api/admin/upload", { method: "POST", credentials: "same-origin", body: body })
+            .then(function (response) {
+              return response.json().then(function (payload) {
+                if (!response.ok) throw new Error(payload.error || "Не удалось загрузить");
+                return payload;
+              });
+            })
+            .then(function (payload) {
+              item.image = payload.url;
+              link.querySelector("input").value = "";
+              showPreview();
+            })
+            .catch(function (err) { alert(err.message); })
+            .finally(function () {
+              upload.disabled = false;
+              upload.textContent = "Загрузить фото";
+              file.value = "";
+            });
+        });
+        card.appendChild(upload);
+        card.appendChild(file);
+        link.querySelector("input").addEventListener("input", function (event) {
+          var value = event.target.value.trim();
+          if (!value || value.indexOf("https://") === 0) {
+            item.image = value;
+            showPreview();
+          }
+        });
+        card.appendChild(link);
+        box.appendChild(card);
+      });
+    }
+
+    function drawStores() {
+      var box = document.getElementById("stores");
+      box.replaceChildren();
+      (content.stores || []).forEach(function (item, index) {
+        var card = document.createElement("article");
+        card.className = "card-edit";
+        var head = document.createElement("div");
+        head.className = "item-head";
+        var strong = document.createElement("strong");
+        strong.textContent = item.address || "Новый магазин";
+        var del = document.createElement("button");
+        del.className = "btn btn-line";
+        del.type = "button";
+        del.textContent = "Удалить";
+        del.addEventListener("click", function () {
+          content.stores.splice(index, 1);
+          drawStores();
+        });
+        head.appendChild(strong);
+        head.appendChild(del);
+        card.appendChild(head);
+        var address = field("Адрес", item.address, "address");
+        address.querySelector("input").addEventListener("input", function (event) {
+          item.address = event.target.value;
+          strong.textContent = event.target.value || "Новый магазин";
+        });
+        var hours = field("Время работы", item.hours, "hours");
+        hours.querySelector("input").placeholder = "8:00–18:00";
+        hours.querySelector("input").addEventListener("input", function (event) {
+          item.hours = event.target.value;
+        });
+        var map = field("Ссылка на карту", item.map, "map");
+        map.querySelector("input").placeholder = "https://";
+        map.querySelector("input").addEventListener("input", function (event) {
+          item.map = event.target.value.trim();
+        });
+        card.appendChild(address);
+        card.appendChild(hours);
+        card.appendChild(map);
+        box.appendChild(card);
+      });
+    }
+
+    function showApp() {
+      document.getElementById("login").hidden = true;
+      document.getElementById("app").hidden = false;
+      fillContacts();
+      drawJobs();
+      drawProducts();
+      drawPartners();
+      drawStores();
+    }
+
+    document.getElementById("login-form").addEventListener("submit", function (event) {
+      event.preventDefault();
+      var error = document.getElementById("login-error");
+      error.textContent = "";
+      api("/api/login", { method: "POST", body: JSON.stringify({ password: event.target.password.value }) })
+        .then(function () { return api("/api/admin/content"); })
+        .then(function (data) { content = data; showApp(); })
+        .catch(function (err) { error.textContent = err.message; });
+    });
+
+    document.getElementById("logout").addEventListener("click", function () {
+      api("/api/logout", { method: "POST", body: "{}" }).finally(function () { location.reload(); });
+    });
+
+    document.querySelectorAll("[data-tab]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        document.querySelectorAll("[data-tab]").forEach(function (item) { item.classList.remove("active"); });
+        button.classList.add("active");
+        document.querySelectorAll("[data-pane]").forEach(function (pane) {
+          pane.hidden = pane.dataset.pane !== button.dataset.tab;
+        });
+      });
+    });
+
+    document.getElementById("add-job").addEventListener("click", function () {
+      content.vacancies.unshift({ tag: "", title: "", lead: "", tasks: [], needs: [], terms: [], showEmail: true });
+      drawJobs();
+    });
+    document.getElementById("add-product").addEventListener("click", function () {
+      content.products.unshift({ cat: "fresh", badge: "", title: "", image: "" });
+      drawProducts();
+    });
+    document.getElementById("add-partner").addEventListener("click", function () {
+      if (!content.partners) content.partners = [];
+      content.partners.unshift({ name: "", image: "" });
+      drawPartners();
+    });
+    document.getElementById("add-store").addEventListener("click", function () {
+      if (!content.stores) content.stores = [];
+      content.stores.unshift({ address: "", hours: "", map: "" });
+      drawStores();
+    });
+    document.getElementById("save").addEventListener("click", function () {
+      readContacts();
+      var status = document.getElementById("status");
+      status.textContent = "Сохраняю…";
+      api("/api/admin/content", { method: "POST", body: JSON.stringify(content) })
+        .then(function () { status.textContent = "Сохранено. Обновите страницу сайта."; })
+        .catch(function (err) { status.textContent = err.message; });
+    });
+
+    api("/api/session").then(function (session) {
+      if (!session.ok) return;
+      return api("/api/admin/content").then(function (data) { content = data; showApp(); });
+    }).catch(function () {});
+  </script>
+</body>
+</html>
