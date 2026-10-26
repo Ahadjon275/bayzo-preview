@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,600;7..72,700&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans:wght@400;600;700&family=Noto+Serif:wght@500;600;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=directions">
+  <link rel="stylesheet" href="css/styles.css?v=recipepage">
 </head>
 <body>
   <header class="site-header">
@@ -19,11 +19,11 @@
     </a>
     <nav class="nav" aria-label="Основное меню">
       <a class="active" href="index.html">Главная</a>
-      <a href="catalog.html">Каталог</a>
       <a href="about.html">О нас</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="stores.html">Магазины</a>
       <a href="recipes.html">Рецепты</a>
       <a href="vacancies.html">Вакансии</a>
-      <a href="stores.html">Магазины</a>
     </nav>
     <div class="header-actions">
       <div class="langs">
@@ -342,20 +342,7 @@
         </div>
         <a class="btn btn-line" href="recipes.html">Все рецепты</a>
       </div>
-      <div class="recipe-grid">
-        <a class="recipe-card" href="recipes.html">
-          <img src="https://bayzo.tj/wp-content/uploads/2026/06/orig.jpg" alt="Крылышки">
-          <div class="recipe-body"><span class="badge">Крылышки</span><h3>Хрустящая панировка и кефирный маринад</h3></div>
-        </a>
-        <a class="recipe-card" href="recipes.html">
-          <img src="https://bayzo.tj/wp-content/uploads/2026/06/f8d9700c0daae6772f7e9432eae4143c.jpg" alt="Филе">
-          <div class="recipe-body"><span class="badge">Филе</span><h3>Сливочно-грибной соус и кармашки с сыром</h3></div>
-        </a>
-        <a class="recipe-card" href="recipes.html">
-          <img src="https://bayzo.tj/wp-content/uploads/2026/06/kurinye-okorochka-v-aerogrile_1761292969_2_ofki3pr_max.jpg" alt="Окорочка">
-          <div class="recipe-body"><span class="badge">Окорочка</span><h3>Запечённые с чесноком и травами</h3></div>
-        </a>
-      </div>
+      <div class="recipe-grid" data-content="recipes-home"></div>
     </div>
   </section>
 
@@ -387,11 +374,12 @@
         <div>
           <h3>Разделы</h3>
           <ul>
-            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="index.html">Главная</a></li>
             <li><a href="about.html">О нас</a></li>
+            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="stores.html">Магазины</a></li>
             <li><a href="recipes.html">Рецепты</a></li>
             <li><a href="vacancies.html">Вакансии</a></li>
-            <li><a href="stores.html">Магазины</a></li>
             <li><a href="about.html#contacts">Контакты</a></li>
           </ul>
         </div>
@@ -410,7 +398,7 @@
   <script src="js/main.js?v=langs"></script>
   <script src="js/more.js?v=directions"></script>
   <script src="js/i18n.js?v=directions"></script>
-  <script src="../js/content.js?v=partners"></script>
+  <script src="../js/content.js?v=recipepage"></script>
   <script src="js/map.js?v=1"></script>
 </body>
 </html>

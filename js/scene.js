@@ -16,95 +16,40 @@ if (!canvas) {
   if (renderer) {
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x07110c);
-    scene.fog = new THREE.Fog(0x07110c, 7, 16);
+    scene.fog = new THREE.Fog(0x07110c, 14, 24);
 
     const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 40);
     camera.position.set(-0.4, 0.85, 7.4);
 
-    const cream = new THREE.MeshPhysicalMaterial({
-      color: 0xf6f1e6,
-      roughness: 0.38,
-      metalness: 0.04,
-      clearcoat: 0.75,
-      clearcoatRoughness: 0.25
-    });
-    const leaf = new THREE.MeshPhysicalMaterial({
-      color: 0x1e8a48,
-      roughness: 0.28,
-      metalness: 0.18,
-      emissive: 0x0c3d22,
-      emissiveIntensity: 0.55,
-      clearcoat: 0.4
-    });
-    const beakMat = new THREE.MeshStandardMaterial({ color: 0xe2b15a, roughness: 0.4 });
-    const combMat = new THREE.MeshStandardMaterial({ color: 0xc4483a, roughness: 0.45 });
-
     const bird = new THREE.Group();
-
-    const body = new THREE.Mesh(new THREE.SphereGeometry(1, 48, 32), cream);
-    body.scale.set(1.25, 0.92, 0.86);
-    bird.add(body);
-
-    const head = new THREE.Mesh(new THREE.SphereGeometry(0.42, 32, 24), cream);
-    head.position.set(0.72, 0.62, 0.08);
-    bird.add(head);
-
-    const beak = new THREE.Mesh(new THREE.ConeGeometry(0.12, 0.38, 20), beakMat);
-    beak.position.set(1.12, 0.58, 0.08);
-    beak.rotation.z = -Math.PI / 2;
-    bird.add(beak);
-
-    const comb = new THREE.Mesh(new THREE.SphereGeometry(0.12, 16, 12), combMat);
-    comb.position.set(0.62, 0.98, 0.08);
-    comb.scale.set(0.7, 1.1, 0.45);
-    bird.add(comb);
-
-    const wing = new THREE.Mesh(new THREE.SphereGeometry(0.55, 28, 18), cream);
-    wing.position.set(-0.05, 0.05, 0.55);
-    wing.scale.set(1.15, 0.55, 0.22);
-    bird.add(wing);
-
-    const wing2 = wing.clone();
-    wing2.position.z = -0.55;
-    bird.add(wing2);
-
-    const tail = new THREE.Mesh(new THREE.ConeGeometry(0.28, 0.9, 16), leaf);
-    tail.position.set(-1.15, 0.35, 0);
-    tail.rotation.z = Math.PI / 2.3;
-    bird.add(tail);
-
-    const legGeo = new THREE.CylinderGeometry(0.045, 0.045, 0.7, 12);
-    const leg = new THREE.Mesh(legGeo, beakMat);
-    leg.position.set(0.15, -0.95, 0.18);
-    bird.add(leg);
-    const legB = leg.clone();
-    legB.position.z = -0.18;
-    bird.add(legB);
-
     const ring = new THREE.Mesh(
-      new THREE.TorusGeometry(2.05, 0.012, 12, 90),
-      new THREE.MeshBasicMaterial({ color: 0x6dffb0, transparent: true, opacity: 0.75 })
+      new THREE.TorusGeometry(1.72, 0.012, 12, 90),
+      new THREE.MeshBasicMaterial({ color: 0x6dffb0, transparent: true, opacity: 0.55 })
     );
-    ring.rotation.x = Math.PI / 2.15;
+    ring.position.z = -0.35;
     bird.add(ring);
-
     const ring2 = new THREE.Mesh(
-      new THREE.TorusGeometry(2.35, 0.006, 12, 90),
-      new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.28 })
+      new THREE.TorusGeometry(2.05, 0.006, 12, 90),
+      new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.18 })
     );
-    ring2.rotation.x = Math.PI / 3.1;
-    ring2.rotation.y = 0.6;
+    ring2.position.z = -0.4;
     bird.add(ring2);
-
-    const eye = new THREE.Mesh(
-      new THREE.SphereGeometry(0.045, 12, 12),
-      new THREE.MeshStandardMaterial({ color: 0x102018, roughness: 0.3 })
-    );
-    eye.position.set(0.98, 0.72, 0.28);
-    bird.add(eye);
-
-    bird.scale.setScalar(0.72);
     scene.add(bird);
+
+    const loader = new THREE.TextureLoader();
+    loader.load("img/chicken.png", (map) => {
+      map.colorSpace = THREE.SRGBColorSpace;
+      const sprite = new THREE.Sprite(new THREE.SpriteMaterial({
+        map,
+        transparent: true,
+        depthWrite: false
+      }));
+      const aspect = map.image.width / Math.max(map.image.height, 1);
+      const height = 3.35;
+      sprite.scale.set(height * aspect, height, 1);
+      sprite.position.z = 0.05;
+      bird.add(sprite);
+    });
 
     const dots = new Float32Array(80 * 3);
     for (let i = 0; i < dots.length; i += 3) {
@@ -122,10 +67,10 @@ if (!canvas) {
     const key = new THREE.DirectionalLight(0xfff4e4, 2.2);
     key.position.set(3, 4, 5);
     scene.add(key);
-    const rim = new THREE.DirectionalLight(0x3dff8a, 1.6);
+    const rim = new THREE.DirectionalLight(0x9dffc0, 0.55);
     rim.position.set(-4, 2, -2);
     scene.add(rim);
-    const fill = new THREE.PointLight(0x7dffb3, 8, 12);
+    const fill = new THREE.PointLight(0xfff4df, 6, 14);
     fill.position.set(1.5, 0.2, 2);
     scene.add(fill);
 
@@ -140,22 +85,22 @@ if (!canvas) {
       camera.aspect = width / Math.max(height, 1);
       if (phone) {
         camera.fov = 32;
-        camera.position.set(0.1, 0.1, 8.4);
-        baseX = 0.95;
-        baseY = 1.68;
-        bird.scale.setScalar(0.56);
+        camera.position.set(0.1, 0.15, 8.6);
+        baseX = 0.15;
+        baseY = -0.15;
+        bird.scale.setScalar(0.62);
       } else if (narrow) {
         camera.fov = 32;
         camera.position.set(0, 0.85, 7.4);
         baseX = 0;
-        baseY = 0;
-        bird.scale.setScalar(0.72);
+        baseY = 0.35;
+        bird.scale.setScalar(0.66);
       } else {
         camera.fov = 32;
-        camera.position.set(-0.4, 0.85, 7.4);
-        baseX = 2.25;
-        baseY = -0.1;
-        bird.scale.setScalar(0.72);
+        camera.position.set(-0.4, 0.55, 7.6);
+        baseX = 2.15;
+        baseY = 0.42;
+        bird.scale.setScalar(0.64);
       }
       camera.updateProjectionMatrix();
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, phone || narrow ? 1.25 : 1.6));
@@ -169,8 +114,7 @@ if (!canvas) {
     function frame() {
       const t = clock.getElapsedTime();
       if (!reduced) {
-        bird.rotation.y = t * 0.35;
-        bird.position.set(baseX, baseY + Math.sin(t * 1.2) * 0.08, 0);
+        bird.position.set(baseX, baseY + Math.sin(t * 1.2) * 0.06, 0);
         ring.rotation.z = t * 0.25;
         ring2.rotation.z = -t * 0.18;
         spark.rotation.y = t * 0.05;

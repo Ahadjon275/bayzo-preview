@@ -38,25 +38,33 @@ if (form) {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const data = new FormData(form);
-    const lang = document.documentElement.dataset.lang || "ru";
-    const labels = {
-      ru: { name: "Имя", phone: "Телефон", subject: "Заявка с сайта Bayzo" },
-      tg: { name: "Ном", phone: "Телефон", subject: "Дархост аз сомонаи Bayzo" },
-      en: { name: "Name", phone: "Phone", subject: "Request from the Bayzo website" },
-      zh: { name: "姓名", phone: "电话", subject: "来自 Bayzo 网站的申请" },
-      tr: { name: "Ad", phone: "Telefon", subject: "Bayzo sitesinden talep" },
-      uz: { name: "Ism", phone: "Telefon", subject: "Bayzo saytidan ariza" },
-      fa: { name: "نام", phone: "تلفن", subject: "درخواست از وب‌سایت Bayzo" }
-    }[lang] || { name: "Имя", phone: "Телефон", subject: "Заявка с сайта Bayzo" };
-    const body = [
-      labels.name + ": " + data.get("name"),
-      labels.phone + ": " + data.get("phone"),
-      "",
-      data.get("message")
-    ].join("\n");
     const note = form.querySelector(".form-note");
-    if (note) note.classList.add("show");
-    window.location.href = "mailto:info@bayzo.tj?subject=" + encodeURIComponent(labels.subject) + "&body=" + encodeURIComponent(body);
+    const button = form.querySelector("button[type=submit]");
+    if (button) button.disabled = true;
+    fetch("/api/order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: data.get("name"),
+        phone: data.get("phone"),
+        product: data.get("product"),
+        message: data.get("message")
+      })
+    }).then((response) => response.json().then((body) => {
+      if (!response.ok) throw new Error(body.error || "");
+      form.reset();
+      if (note) {
+        note.classList.add("show");
+        note.textContent = "Заявка принята. Мы свяжемся с вами по телефону.";
+      }
+    })).catch(() => {
+      if (note) {
+        note.classList.add("show");
+        note.textContent = "Заявка не отправилась. Позвоните на 88 11 или напишите на info@bayzo.tj.";
+      }
+    }).finally(() => {
+      if (button) button.disabled = false;
+    });
   });
 }
 

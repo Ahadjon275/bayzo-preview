@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,600;7..72,700&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans:wght@400;600;700&family=Noto+Serif:wght@500;600;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=about">
+  <link rel="stylesheet" href="css/styles.css?v=order">
 </head>
 <body>
   <header class="site-header">
@@ -19,11 +19,11 @@
     </a>
     <nav class="nav" aria-label="Основное меню">
       <a href="index.html">Главная</a>
-      <a href="catalog.html">Каталог</a>
       <a class="active" href="about.html">О нас</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="stores.html">Магазины</a>
       <a href="recipes.html">Рецепты</a>
       <a href="vacancies.html">Вакансии</a>
-      <a href="stores.html">Магазины</a>
     </nav>
     <div class="header-actions">
       <div class="langs">
@@ -140,18 +140,29 @@
           </article>
         </div>
         <form class="contact-form">
-          <h2 class="block-title" style="font-size:32px">Написать нам</h2>
-          <p class="form-note" role="status">Откроется почтовая программа, чтобы отправить сообщение на info@bayzo.tj. Если письмо не открылось, напишите на эту почту или позвоните на 88 11.</p>
+          <h2 class="block-title" style="font-size:32px">Заявка на мясо</h2>
+          <p class="form-note show" role="status">Оставьте имя и телефон. Мы перезвоним и оформим заказ. Если заявка не отправилась, позвоните на 88 11.</p>
           <label>Имя
             <input name="name" type="text" required placeholder="Как к вам обращаться">
           </label>
           <label>Телефон
             <input name="phone" type="tel" required placeholder="+992">
           </label>
-          <label>Сообщение
-            <textarea name="message" rows="5" required placeholder="Опт, магазин или вопрос по продукции"></textarea>
+          <label>Какое мясо
+            <select name="product" required>
+              <option value="">Выберите</option>
+              <option>Тушка</option>
+              <option>Филе</option>
+              <option>Голень</option>
+              <option>Крыло</option>
+              <option>Окорочка</option>
+              <option>Печень</option>
+            </select>
           </label>
-          <button class="btn btn-green" type="submit">Отправить</button>
+          <label>Комментарий
+            <textarea name="message" rows="5" placeholder="Сколько нужно и когда удобно забрать"></textarea>
+          </label>
+          <button class="btn btn-green" type="submit">Отправить заявку</button>
         </form>
       </div>
     </div>
@@ -171,10 +182,11 @@
           <h3>Разделы</h3>
           <ul>
             <li><a href="index.html">Главная</a></li>
+            <li><a href="about.html">О нас</a></li>
             <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="stores.html">Магазины</a></li>
             <li><a href="recipes.html">Рецепты</a></li>
             <li><a href="vacancies.html">Вакансии</a></li>
-            <li><a href="stores.html">Магазины</a></li>
             <li><a href="about.html#contacts">Контакты</a></li>
           </ul>
         </div>
@@ -189,9 +201,9 @@
       <div class="copy"><span>© 2018–<span data-year>2026</span> Bayzo</span><span>ООО «Чучаи Байзо»</span></div>
     </div>
   </footer>
-  <script src="js/main.js?v=langs"></script>
+  <script src="js/main.js?v=order"></script>
   <script src="js/more.js?v=langs"></script>
   <script src="js/i18n.js?v=langs"></script>
-  <script src="../js/content.js?v=upload"></script>
+  <script src="../js/content.js?v=users"></script>
 </body>
 </html>

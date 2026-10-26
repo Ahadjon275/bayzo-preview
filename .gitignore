@@ -1,4 +1,6 @@
 data/auth.json
 data/password.txt
+data/orders.json
+data/content.private.json
 __pycache__/
 _chrome_profile/

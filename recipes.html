@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans:wght@400;600;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=langs">
+  <link rel="stylesheet" href="css/styles.css?v=same">
 </head>
 <body>
   <header class="site-header">
@@ -19,11 +19,11 @@
     </a>
     <nav class="nav" aria-label="Основное меню">
       <a href="index.html">Главная</a>
-      <a href="catalog.html">Каталог</a>
       <a href="about.html">О нас</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="stores.html">Магазины</a>
       <a class="active" href="recipes.html">Рецепты</a>
       <a href="vacancies.html">Вакансии</a>
-      <a href="contacts.html">Контакты</a>
     </nav>
     <div class="header-actions">
       <div class="langs">
@@ -52,55 +52,55 @@
   </div>
 
   <section style="padding-top:10px">
-    <div class="wrap recipe-grid">
-      <article class="recipe-card">
+    <div class="wrap recipe-grid" data-content="recipes">
+      <a class="recipe-card" href="classic/recipe.html?id=a11ce00000000001">
         <img src="https://bayzo.tj/wp-content/uploads/2026/06/orig.jpg" alt="Крылышки в панировке">
         <div class="recipe-body">
           <span class="badge">Крылышки</span>
           <h3>Крылышки в хрустящей панировке</h3>
           <p>Маринад на кефире, сухая панировка и запекание до золотистой корочки.</p>
         </div>
-      </article>
-      <article class="recipe-card">
+      </a>
+      <a class="recipe-card" href="classic/recipe.html?id=a11ce00000000002">
         <img src="https://bayzo.tj/wp-content/uploads/2026/06/f8d9700c0daae6772f7e9432eae4143c.jpg" alt="Филе в соусе">
         <div class="recipe-body">
           <span class="badge">Филе</span>
           <h3>Филе в сливочно-грибном соусе</h3>
           <p>Нежная грудка без кожи, грибы и сливки. Рядом — кармашки с сыром и помидорами.</p>
         </div>
-      </article>
-      <article class="recipe-card">
+      </a>
+      <a class="recipe-card" href="classic/recipe.html?id=a11ce00000000003">
         <img src="https://bayzo.tj/wp-content/uploads/2026/04/gol.png" alt="Голень в глазури">
         <div class="recipe-body">
           <span class="badge">Голень</span>
           <h3>Голени в горчично-медовой глазури</h3>
           <p>Сладко-острая глазурь карамелизуется в духовке и держит мясо сочным.</p>
         </div>
-      </article>
-      <article class="recipe-card">
+      </a>
+      <a class="recipe-card" href="classic/recipe.html?id=a11ce00000000004">
         <img src="https://bayzo.tj/wp-content/uploads/2026/06/roastchicken_recipe_080420_37993.jpg" alt="Целая тушка">
         <div class="recipe-body">
           <span class="badge">Тушка</span>
           <h3>Курица по-домашнему</h3>
           <p>Целая тушка на овощной подушке: картофель, морковь и специи родной кухни.</p>
         </div>
-      </article>
-      <article class="recipe-card">
+      </a>
+      <a class="recipe-card" href="classic/recipe.html?id=a11ce00000000005">
         <img src="https://bayzo.tj/wp-content/uploads/2026/06/kurinye-okorochka-v-aerogrile_1761292969_2_ofki3pr_max.jpg" alt="Окорочка">
         <div class="recipe-body">
           <span class="badge">Окорочка</span>
           <h3>Окорочка с чесноком и травами</h3>
           <p>Запекание в рукаве или на соляной подушке — мясо остаётся мягким.</p>
         </div>
-      </article>
-      <article class="recipe-card">
+      </a>
+      <a class="recipe-card" href="classic/recipe.html?id=a11ce00000000006">
         <img src="https://bayzo.tj/wp-content/uploads/2020/08/photo_2025-12-08_13-29-04-800x800.jpg" alt="Печень в сметане">
         <div class="recipe-body">
           <span class="badge">Субпродукты</span>
           <h3>Печень в сметане с луком</h3>
           <p>Быстрое блюдо из печени, сердечек или желудков — для будней и плова.</p>
         </div>
-      </article>
+      </a>
     </div>
   </section>
 
@@ -118,10 +118,12 @@
           <h3>Разделы</h3>
           <ul>
             <li><a href="index.html">Главная</a></li>
-            <li><a href="catalog.html">Каталог</a></li>
             <li><a href="about.html">О нас</a></li>
+            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="stores.html">Магазины</a></li>
+            <li><a href="recipes.html">Рецепты</a></li>
             <li><a href="vacancies.html">Вакансии</a></li>
-            <li><a href="contacts.html">Контакты</a></li>
+            <li><a href="about.html#contacts">Контакты</a></li>
           </ul>
         </div>
         <div>
@@ -135,8 +137,9 @@
       <div class="copy"><span>© 2018–<span data-year>2026</span> Bayzo</span><a href="https://bayzo.tj" target="_blank" rel="noreferrer">bayzo.tj</a></div>
     </div>
   </footer>
-  <script src="js/main.js?v=langs"></script>
-  <script src="js/more.js?v=langs"></script>
-  <script src="js/i18n.js?v=langs"></script>
+  <script src="js/main.js?v=order"></script>
+  <script src="js/more.js?v=same"></script>
+  <script src="js/i18n.js?v=same"></script>
+  <script src="js/content.js?v=same"></script>
 </body>
 </html>

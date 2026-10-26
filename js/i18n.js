@@ -80,6 +80,9 @@
     "Бохтар": ["Бохтар", "Bokhtar"],
     "Куляб": ["Кӯлоб", "Kulob"],
     "Хорог": ["Хоруғ", "Khorog"],
+    "Фирменный магазин и производство": ["Мағозаи фирмавӣ ва истеҳсолот", "Branded store and production"],
+    "ул. Чувашня, 20/1, джамоат Исфисор": ["кӯч. Чувашня, 20/1, ҷамоати Исфисор", "Chuvashnya St. 20/1, Isfisor jamoat"],
+    "Продукция Bayzo есть в этом городе.": ["Маҳсулоти Bayzo дар ин шаҳр ҳаст.", "Bayzo products are in this city."],
     "Карта присутствия Bayzo в Таджикистане": ["Харитаи ҳузури Bayzo дар Тоҷикистон", "Map of Bayzo across Tajikistan"],
     "Партнёры": ["Шарикҳо", "Partners"],
     "Нам доверяют ведущие бренды": ["Ба мо брендҳои пешсаф бовар доранд", "Leading brands trust us"],
@@ -178,6 +181,21 @@
     "Короткий номер для звонков по Таджикистану": ["Рақами кӯтоҳ барои зангҳо дар Тоҷикистон", "A short number for calls inside Tajikistan"],
     "Почта": ["Почта", "Email"],
     "Адрес": ["Суроға", "Address"],
+    "Магазины": ["Мағозаҳо", "Shops"],
+    "Направления": ["Самтҳо", "What we sell"],
+    "Что мы продаём": ["Мо чӣ мефурӯшем", "What we sell"],
+    "Мясо": ["Гӯшт", "Meat"],
+    "Охлаждённое и замороженное мясо цыплёнка-бройлера: тушка, филе, голень и крыло.": ["Гӯшти хунуккарда ва яхкардаи чӯҷаи бройлер: туша, филе, соқ ва бол.", "Chilled and frozen broiler meat: whole bird, fillet, drumstick and wing."],
+    "Комбикорм": ["Хӯроки омехта", "Compound feed"],
+    "Свой завод с 2021 года выпускает до 5 тонн корма в час.": ["Корхонаи худӣ аз соли 2021 то 5 тонна хӯрок дар як соат мебарорад.", "Our own plant has produced up to 5 tonnes of feed an hour since 2021."],
+    "Цыплята": ["Чӯҷаҳо", "Chicks"],
+    "Продаём цыплят-бройлеров. Партию подскажем по номеру 88 11.": ["Чӯҷаҳои бройлерро мефурӯшем. Миқдорро бо рақами 88 11 мегӯем.", "We sell broiler chicks. Call 88 11 to ask about a batch."],
+    "В каталог": ["Ба каталог", "Open the catalog"],
+    "Сеть": ["Шабака", "Network"],
+    "Время работы": ["Вақти кор", "Opening hours"],
+    "Показать на карте": ["Нишон додан дар харита", "Show on map"],
+    "Адреса фирменных магазинов Bayzo.": ["Суроғаҳои мағозаҳои фирмии Bayzo.", "Addresses of Bayzo branded stores."],
+    "Адреса магазинов появятся здесь.": ["Суроғаҳои мағозаҳо дар ин ҷо пайдо мешаванд.", "Store addresses will appear here."],
     "Таджикистан, Б. Гафуров, джамоат Исфисор, ул. Чувашня 20/1": ["Тоҷикистон, Б. Ғафуров, ҷамоати Исфисор, кӯч. Чувашня 20/1", "Tajikistan, B. Gafurov, Isfisor jamoat, Chuvashnya St. 20/1"],
     "Открыть на карте": ["Кушодан дар харита", "Open on the map"],
     "Откроется почтовая программа, чтобы отправить сообщение на info@bayzo.tj. Если письмо не открылось, напишите на эту почту или позвоните на 88 11.": ["Барномаи почта кушода мешавад, то паём ба info@bayzo.tj равад. Агар мактуб кушода нашавад, ба ҳамин почта нависед ё ба 88 11 занг занед.", "Your mail app will open to send a message to info@bayzo.tj. If it does not open, write to that address or call 88 11."],
@@ -213,7 +231,7 @@
     "Визиты строго по утверждённому маршруту.": ["Ташрифҳо қатъӣ аз рӯи маршрути тасдиқшуда.", "Visits strictly on the approved route."],
     "Возраст 18–35 лет.": ["Синну сол 18–35.", "Age 18–35."],
     "Ответственность и вежливое общение с персоналом магазинов.": ["Масъулият ва муоширати боадабона бо кормандони мағоза.", "Responsibility and polite contact with shop staff."],
-    "Опыт мерчандайзера или торгового представителя — преимущество. Без опыта рассматриваем: есть обучение.": ["Таҷрибаи мерчандайзер ё намояндаи савдо — бартарӣ аст. Бе таҷриба ҳам мебинем: омӯзиш ҳаст.", "Merchandiser or sales-rep experience is an advantage. We also consider people without experience: training is provided."],
+    "Опыт мерчандайзера или торгового представителя — преимущество. Без опыта рассматриваем: есть обучение.": ["Таҷрибаи мерчендайзер ё намояндаи савдо — бартарӣ аст. Бе таҷриба ҳам мебинем: омӯзиш ҳаст.", "Merchandiser or sales-rep experience is an advantage. We also consider people without experience: training is provided."],
     "Стабильная компания, зарплата в срок, скидки на продукцию, рост внутри компании.": ["Ширкати устувор, маош сари вақт, тахфиф ба маҳсулот, рушд дар дохили ширкат.", "A stable company, pay on time, product discounts and growth inside the company."],
     "IT · февраль 2026": ["IT · феврали 2026", "IT · February 2026"],
     "IT-специалист": ["Мутахассиси IT", "IT specialist"],
@@ -285,7 +303,8 @@
     "about.html": ["Дар бораи мо — Bayzo", "About — Bayzo", "О нас — Bayzo"],
     "recipes.html": ["Рецептҳо — Bayzo", "Recipes — Bayzo", "Рецепты — Bayzo"],
     "contacts.html": ["Тамос — Bayzo", "Contacts — Bayzo", "Контакты — Bayzo"],
-    "vacancies.html": ["Вакансияҳо — Bayzo", "Jobs — Bayzo", "Вакансии — Bayzo"]
+    "vacancies.html": ["Вакансияҳо — Bayzo", "Jobs — Bayzo", "Вакансии — Bayzo"],
+    "stores.html": ["Мағозаҳо — Bayzo", "Shops — Bayzo", "Магазины — Bayzo"]
   };
 
   const descriptions = {
@@ -318,6 +337,11 @@
       "Вакансияҳои ҶДММ «Чучаи Байзо»: идора, истеҳсолот, фабрикаи паранда ва расонидан. Резюме ба hr@bayzo.tj.",
       "Jobs at Chuchai Bayzo LLC: office, production, poultry farm and delivery. CV to hr@bayzo.tj.",
       "Вакансии ООО «Чучаи Байзо»: офис, производство, птицефабрика и доставка. Резюме на hr@bayzo.tj."
+    ],
+    "stores.html": [
+      "Суроғаҳо ва вақти кори мағозаҳои фирмии Bayzo.",
+      "Addresses and opening hours of Bayzo branded stores.",
+      "Адреса и время работы фирменных магазинов Bayzo."
     ]
   };
 
