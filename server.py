@@ -60,14 +60,13 @@ def check_password(password, stored):
 def ensure_auth():
     if AUTH.exists():
         return
+    login = "u" + secrets.token_hex(4)
     password = secrets.token_urlsafe(9)
     AUTH.parent.mkdir(parents=True, exist_ok=True)
-    AUTH.write_text(json.dumps({"user": "bayzo", "password": hash_password(password)}), encoding="utf-8")
-    PASSWORD_FILE.write_text(password + "\n", encoding="utf-8")
+    AUTH.write_text(json.dumps({"user": login, "password": hash_password(password)}), encoding="utf-8")
+    PASSWORD_FILE.write_text(login + "\n" + password + "\n", encoding="utf-8")
     print("Админка: http://%s:%s/admin" % (HOST, PORT))
-    print("Логин: bayzo")
-    print("Пароль: %s" % password)
-    print("Пароль также записан в data/password.txt и в git не попадает.")
+    print("Логин и пароль записаны в data/password.txt и в git не попадают.")
 
 
 def read_auth():
