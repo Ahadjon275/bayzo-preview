@@ -37,7 +37,7 @@ if (!canvas) {
     scene.add(bird);
 
     const loader = new THREE.TextureLoader();
-    loader.load("img/chicken.png", (map) => {
+    loader.load("img/chicken.webp", (map) => {
       map.colorSpace = THREE.SRGBColorSpace;
       const sprite = new THREE.Sprite(new THREE.SpriteMaterial({
         map,

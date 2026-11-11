@@ -6,6 +6,15 @@
     if (src.indexOf("https://") === 0 || src.indexOf("http://") === 0) return src;
     return root + src.replace(/^\//, "");
   }
+  function makeImg(src, alt, eager) {
+    var img = document.createElement("img");
+    img.src = src;
+    img.alt = alt || "";
+    img.decoding = "async";
+    if (eager) img.fetchPriority = "high";
+    else img.loading = "lazy";
+    return img;
+  }
   function lines(list) {
     return (list || []).map(function (item) { return String(item || "").trim(); }).filter(Boolean);
   }
@@ -77,10 +86,7 @@
       if (linked) article.href = "catalog.html";
       else article.dataset.cat = item.cat || "fresh";
       if (item.image) {
-        var img = document.createElement("img");
-        img.src = photo(item.image);
-        img.alt = item.title || "";
-        article.appendChild(img);
+        article.appendChild(makeImg(photo(item.image), item.title || ""));
       }
       var body = document.createElement("div");
       body.className = "product-body";
@@ -112,10 +118,7 @@
       if (hidden) set.setAttribute("aria-hidden", "true");
       for (var i = 0; i < count; i++) {
         var item = items[i % items.length];
-        var img = document.createElement("img");
-        img.src = photo(item.image);
-        img.alt = item.name || "Партнёр";
-        set.appendChild(img);
+        set.appendChild(makeImg(photo(item.image), item.name || "Партнёр"));
       }
       return set;
     }
@@ -186,10 +189,7 @@
       card.className = "recipe-card";
       card.href = recipeLink(item.id);
       if (item.image) {
-        var img = document.createElement("img");
-        img.src = photo(item.image);
-        img.alt = item.title || "";
-        card.appendChild(img);
+        card.appendChild(makeImg(photo(item.image), item.title || ""));
       }
       var body = document.createElement("div");
       body.className = "recipe-body";
@@ -238,10 +238,7 @@
     var article = document.createElement("article");
     article.className = "recipe-article";
     if (item.image) {
-      var img = document.createElement("img");
-      img.src = photo(item.image);
-      img.alt = item.title || "";
-      article.appendChild(img);
+      article.appendChild(makeImg(photo(item.image), item.title || "", true));
     }
     var copy = document.createElement("div");
     if (item.badge) {

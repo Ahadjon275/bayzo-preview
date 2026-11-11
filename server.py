@@ -3,9 +3,12 @@
 import hashlib
 import hmac
 import json
+import mimetypes
 import re
 import secrets
 import time
+
+mimetypes.add_type("image/webp", ".webp")
 from http.cookies import SimpleCookie
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path

@@ -543,14 +543,14 @@ section { padding: 72px 0; }
 .cta p { margin-top: 8px; color: var(--ink-soft); max-width: 40em; }
 .cta-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
-.jobs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
-.job { padding: 22px; border-top: 2px solid var(--green); }
+.jobs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.job { padding: 22px; border-top: 2px solid var(--green); display: flex; flex-direction: column; }
 .job h2 { font-family: var(--display); font-weight: 500; font-size: clamp(24px, 3vw, 32px); letter-spacing: -0.03em; margin-top: 6px; }
 .job h3 { margin: 14px 0 0; font-size: 15px; }
 .job p { margin-top: 10px; }
 .job ul { margin: 8px 0 0; padding-left: 18px; }
 .job li + li { margin-top: 4px; }
-.job-foot { display: flex; flex-wrap: wrap; gap: 10px 16px; margin-top: 14px; font-weight: 750; }
+.job .job-foot { display: flex; flex-wrap: wrap; gap: 10px 16px; margin-top: auto; padding-top: 14px; font-weight: 750; }
 .job-foot a, .info-card a { color: var(--green); }
 
 form, .info-card { padding: 24px; }

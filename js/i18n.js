@@ -446,29 +446,6 @@
     return "ru";
   }
 
-  const toggle = document.querySelector(".lang-toggle");
-  const list = document.querySelector(".lang-list");
-  if (toggle && list) {
-    toggle.addEventListener("click", (event) => {
-      event.stopPropagation();
-      const open = list.hidden;
-      list.hidden = !open;
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-    });
-    document.addEventListener("click", () => {
-      list.hidden = true;
-      toggle.setAttribute("aria-expanded", "false");
-    });
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        list.hidden = true;
-        toggle.setAttribute("aria-expanded", "false");
-      }
-    });
-  }
-  document.querySelectorAll("button[data-lang]").forEach((btn) => {
-    btn.addEventListener("click", () => apply(btn.dataset.lang));
-  });
   window.BayzoI18n = { apply(lang) { apply(lang || current()); } };
   apply(current());
 })();
